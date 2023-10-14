@@ -1,6 +1,5 @@
 from flask_restful import Resource, request
 from ip import findIp
-import json
 
 
 class SecurityApi(Resource):

@@ -1,0 +1,4 @@
+scapy
+flask_restful
+flask
+flask_cors
