@@ -1,5 +1,8 @@
-from flask_restful import Resource,request
+from flask_restful import Resource, request
+from ip import findIp
 import json
+
+
 class SecurityApi(Resource):
     def get(self):
-        return {"message":"Successfully Registered"},200
+        return {"find": findIp("100.110.132.88")}, 200
