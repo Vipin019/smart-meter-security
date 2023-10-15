@@ -21,8 +21,8 @@ const Notification = () => {
 
   return (
     <div>
-      <h2>Socket.io Client</h2>
-      {updatedData && <div>Received updated data: {updatedData.message}</div>}
+      <h2>Notification Page - Centralized server for Monitoring Team</h2>
+      {updatedData && <div>Notification Received: {updatedData.message}</div>}
     </div>
   );
 };
