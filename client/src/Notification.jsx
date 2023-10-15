@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import socketIOClient from "socket.io-client";
 
-const SocketClient = () => {
+const Notification = () => {
   const [socket, setSocket] = useState(null);
   const [updatedData, setUpdatedData] = useState(null);
 
@@ -27,4 +27,4 @@ const SocketClient = () => {
   );
 };
 
-export default SocketClient;
+export default Notification;
