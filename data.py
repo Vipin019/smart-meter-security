@@ -1,33 +1,18 @@
-import socketio
+import asyncio
 import random
-
-sio = socketio.Server(cors_allowed_origins="*")
-app = socketio.WSGIApp(sio)
-
-updated_data = {"current": 0, "voltage": 0}
+import websockets
+import json
 
 
-@sio.event
-def connect(sid, environ):
-    updated_data = {
-        "current": random.randint(1, 30),
-        "voltage": random.randint(1, 220),
-    }
-    print(f"Client {sid} connected")
-    sio.emit("updated_data", updated_data, room=sid)
+async def server(websocket, path):
+    print(f"Client connected")
+    while True:
+        updated_data = {
+            "current": random.randint(1, 30),
+            "voltage": random.randint(1, 220),
+        }
+        await websocket.send(json.dumps(updated_data))
 
 
-@sio.event
-def disconnect(sid):
-    print(f"Client {sid} disconnected")
-
-
-if __name__ == "__main__":
-    import eventlet
-    import threading
-
-    eventlet.wsgi.server(eventlet.listen(("localhost", 8081)), app)
-
-    # Simulate data updates in a separate thread
-    update_thread = threading.Thread(target=lambda: eventlet.spawn_after(5, connect))
-    update_thread.start()
+asyncio.get_event_loop().run_until_complete(websockets.serve(server, "localhost", 8080))
+asyncio.get_event_loop().run_forever()

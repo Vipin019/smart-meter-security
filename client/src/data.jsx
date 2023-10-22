@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from "react";
-import socketIOClient from "socket.io-client";
 
 const Data = () => {
-  const [socket, setSocket] = useState(null);
-  const [val, setVal] = useState(1);
   const [updatedData, setUpdatedData] = useState({
     current: 0,
     voltage: 0,
   });
   useEffect(() => {
-    const socket = socketIOClient("http://localhost:8081");
-    setSocket(socket);
+    const socket = new WebSocket("ws://localhost:8080");
 
-    socket.on("updated_data", (data) => {
-      setUpdatedData(data);
-    });
+    socket.onopen = function () {
+      console.log("Connection is open");
+    };
+
+    socket.onmessage = function (event) {
+      const jsonData = JSON.parse(event.data);
+      setUpdatedData(jsonData);
+    };
 
     return () => {
-      socket.disconnect();
+      socket.close();
     };
   }, []);
   return (
