@@ -34,3 +34,36 @@ const Data = () => {
 };
 
 export default Data;
+
+// import React, { useState, useEffect } from 'react';
+// import WebSocket from 'react-websocket';
+
+// function App() {
+//   const [pinsData, setPinsData] = useState({pin1: 0, pin2: 0});
+
+//   const handleData = (data) => {
+//     // Data received from WebSocket
+//     const jsonData = JSON.parse(data);
+//     setPinsData(jsonData);
+//   };
+
+//   useEffect(() => {
+//     // Connect to WebSocket
+//     const ws = new WebSocket('ws://YOUR_ESP32_IP:81/'); // Replace with your ESP32 IP
+
+//     return () => {
+//       // Clean up WebSocket connection when component unmounts
+//       ws.close();
+//     };
+//   }, []);
+
+//   return (
+//     <div className="App">
+//       <h1>Pins Data</h1>
+//       <p>Pin 1: {pinsData.pin1}</p>
+//       <p>Pin 2: {pinsData.pin2}</p>
+//     </div>
+//   );
+// }
+
+// export default App;
