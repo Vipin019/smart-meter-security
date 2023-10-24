@@ -8,8 +8,11 @@ async def server(websocket, path):
     print(f"Client connected")
     while True:
         updated_data = {
-            "current": random.randint(1, 30),
-            "voltage": random.randint(1, 220),
+            "vrms": random.randint(1, 220),
+            "irms": random.randint(1, 30),
+            "apparentPower": random.randint(1, 300),
+            "realPower": random.randint(1, 200),
+            "kwh": random.randint(1, 300),
         }
         await websocket.send(json.dumps(updated_data))
 

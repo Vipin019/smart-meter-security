@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 
 const Data = () => {
   const [updatedData, setUpdatedData] = useState({
-    current: 0,
-    voltage: 0,
+    vrms: 0,
+    irms: 0,
+    apparentPower: 0,
+    realPower: 0,
+    kwh: 0,
   });
   useEffect(() => {
     const socket = new WebSocket("ws://localhost:8080");
@@ -26,7 +29,7 @@ const Data = () => {
       <h2>Smart Meter Reading</h2>
       {updatedData && (
         <div>
-          Current: {updatedData.current} and Voltage: {updatedData.voltage}
+          Voltage: {updatedData.current} and Currrent: {updatedData.voltage}
         </div>
       )}
     </div>

@@ -1,7 +1,15 @@
 #include <Arduino.h>
-#include <WiFi.h>
-#include <WebSocketsServer.h>
-#include <ArduinoJson.h> // Include the ArduinoJson library
+#include <WiFi.h>             //use for wifi time connection
+#include <WebSocketsServer.h> //use for sending data in real time
+#include <ArduinoJson.h>      // Include the ArduinoJson library
+#include <EmonLib.h>          //use to read electrical parameters
+
+EnergyMonitor emon; // declare emon variavle of EnergyMonitor data type
+#define vCalibration 83.3
+#define currCalibration 0.50
+
+float kWh = 0;
+unsigned long lastmillis = millis();
 
 const char *ssid = "YOUR_SSID";         // Replace with your WiFi SSID
 const char *password = "YOUR_PASSWORD"; // Replace with your WiFi Password
@@ -9,8 +17,53 @@ const char *password = "YOUR_PASSWORD"; // Replace with your WiFi Password
 WiFiServer server(80);
 WebSocketsServer webSocket = WebSocketsServer(81);
 
-const int pin1 = 2; // Replace with the actual pin numbers you want to read
-const int pin2 = 3;
+String myTimerEvent()
+{
+  emon.calcVI(20, 2000);
+
+  kWh = kWh + emon.apparentPower * (millis() - lastmillis) / 3600000000.0;
+
+  // yield();
+
+  // Create a JSON object
+  DynamicJsonDocument jsonDoc(200); // 200 is the ram allocated
+
+  Serial.print("Vrms: ");
+  Serial.print(emon.Vrms, 2);
+  Serial.print("V");
+  jsonDoc["vrms"] = emon.Vrms;
+  delay(100);
+
+  Serial.print("\tIrms: ");
+  Serial.print(emon.Irms, 4);
+  Serial.print("A");
+  jsonDoc["irms"] = emon.Irms;
+  delay(100);
+
+  Serial.print("\tApparent Power: ");
+  Serial.print(emon.apparentPower, 4);
+  Serial.print("W");
+  jsonDoc["apparentPower"] = emon.apparentPower;
+  delay(100);
+
+  Serial.print("\tReal Power: ");
+  Serial.print(emon.realPower, 4);
+  Serial.print("W");
+  jsonDoc["realPower"] = emon.realPower;
+  delay(100);
+
+  Serial.print("\tkWh: ");
+  Serial.print(kWh, 5);
+  Serial.println("kWh");
+  jsonDoc["kwh"] = kWh;
+  delay(100);
+
+  String jsonString;
+  // Serialize the JSON object to a string
+  serializeJson(jsonDoc, jsonString);
+
+  return jsonString;
+}
 
 void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t length)
 {
@@ -31,6 +84,9 @@ void setup()
 {
   Serial.begin(115200);
 
+  emon.voltage(35, vCalibration, 1.7); // Voltage: input pin, calibration, phase_shift
+  emon.current(34, currCalibration);   // Current: input pin, calibration.
+
   // Connect to Wi-Fi
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED)
@@ -48,21 +104,9 @@ void loop()
 {
   webSocket.loop();
 
-  // Read the pins
-  int pinValue1 = digitalRead(pin1);
-  int pinValue2 = digitalRead(pin2);
+  String jsonString = myTimerEvent();
 
-  // Create a JSON object
-  DynamicJsonDocument jsonDoc(200);
-  jsonDoc["pin1"] = pinValue1;
-  jsonDoc["pin2"] = pinValue2;
-
-  // Serialize the JSON object to a string
-  String jsonString;
-  serializeJson(jsonDoc, jsonString);
-
-  // Send the JSON string to connected clients
   webSocket.broadcastTXT(jsonString);
 
-  delay(1000); // Adjust as needed to control update rate
+  delay(3000);
 }
