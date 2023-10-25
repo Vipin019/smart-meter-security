@@ -9,7 +9,7 @@ updated_data = {"message": "False"}
 
 @sio.event
 def connect(sid, environ):
-    if findIp("100.110.132.88"):
+    if findIp("100.110.186.42"):
         updated_data = {"message": "True"}
     print(f"Client {sid} connected")
     sio.emit("updated_data", updated_data, room=sid)
