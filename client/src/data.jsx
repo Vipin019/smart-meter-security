@@ -29,7 +29,9 @@ const Data = () => {
       <h2>Smart Meter Reading</h2>
       {updatedData && (
         <div>
-          Voltage: {updatedData.current} and Currrent: {updatedData.voltage}
+          <p>Voltage: {updatedData.vrms} and Currrent: {updatedData.irms}</p>
+          <p>Real Power: {updatedData.realPower} and Apparent Powet: {updatedData.apparentPower}  Kwh: {updatedData.kwh}</p>
+
         </div>
       )}
     </div>

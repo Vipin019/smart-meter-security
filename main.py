@@ -2,7 +2,6 @@ import os
 from flask import Flask,jsonify
 from flask_restful import Resource, Api
 from flask_cors import CORS
-# from application.config import LocalDevelopmentConfig
 app = None
 api = None
 
@@ -12,12 +11,8 @@ def create_app():
       raise Exception("Currently no production config is setup.")
     else:
       print("Staring Local Development")
-      # app.config.from_object(LocalDevelopmentConfig)
-    # db.init_app(app)
     app.app_context().push()
     api = Api(app)
-    # jwt = JWTManager(app)
-    # app.app_context().push()
     CORS(app)
     return app, api
   
