@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import MeterCard from "./meterCard";
 
 const Data = () => {
   const [updatedData, setUpdatedData] = useState({
@@ -26,12 +27,22 @@ const Data = () => {
   }, []);
   return (
     <div>
-      <h2>Smart Meter Reading</h2>
+      {/* <h2>Smart Meter Reading</h2> */}
+      <h1><u>Smart Meter Dashboard</u></h1>
       {updatedData && (
-        <div>
-          <p>Voltage: {updatedData.vrms} and Currrent: {updatedData.irms}</p>
-          <p>Real Power: {updatedData.realPower} and Apparent Powet: {updatedData.apparentPower}  Kwh: {updatedData.kwh}</p>
+        // <div>
+        //   <p>Voltage: {updatedData.vrms} and Currrent: {updatedData.irms}</p>
+        //   <p>Real Power: {updatedData.realPower} and Apparent Powet: {updatedData.apparentPower}  Kwh: {updatedData.kwh}</p>
 
+        // </div>
+
+        // contributed by Prince Kumar (20UEE05)
+        <div className="meter-container">
+          <MeterCard title="Voltage (V)" value={updatedData.vrms} />
+          <MeterCard title="Current (A)" value={updatedData.irms} />
+          <MeterCard title="Real Power (W)" value={updatedData.realPower} />
+          <MeterCard title="Apparent Power (VA)" value={updatedData.apparentPower} />
+          <MeterCard title="Energy Consume (KWh)" value={updatedData.kwh} />
         </div>
       )}
     </div>

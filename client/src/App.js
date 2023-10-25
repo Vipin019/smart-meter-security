@@ -6,8 +6,8 @@ import Data from "./data";
 function App() {
   return (
     <div className="App">
-      <Notification />
-      {/* <Data /> */}
+      {/* <Notification /> */}
+      <Data />
     </div>
   );
 }
