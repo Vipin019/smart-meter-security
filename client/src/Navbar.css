@@ -1,0 +1,47 @@
+/* Created by Prince Kumar (20UEE058) */
+.navbar {
+    background-color: #443535;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+  }
+  
+  .nav-list {
+    height: 100%;
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .nav-list li {
+    height: 100%;
+    width: 100%;
+    font-family: sans-serif;
+    font-size: 30px;
+    font-weight: 300;
+    color: #fff; 
+  }
+
+  button {
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    font-size: 22px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    text-decoration: underline;
+    color: rgb(35, 161, 154);
+  }
+  
+  button.selected {
+    font-weight: bold;
+    color: rgb(26, 165, 40);
+  }
+  
