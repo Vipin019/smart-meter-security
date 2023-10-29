@@ -22,7 +22,7 @@ try:
                 break
 
     asyncio.get_event_loop().run_until_complete(
-        websockets.serve(server, "localhost", 8080)
+        websockets.serve(server, "localhost", 81)
     )
     asyncio.get_event_loop().run_forever()
 except KeyboardInterrupt:

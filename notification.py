@@ -16,7 +16,7 @@ try:
             print(f"Error sending data: {e}")
 
     async def main():
-        server = await websockets.serve(connect, "localhost", 8081)
+        server = await websockets.serve(connect, "localhost", 8080)
         await server.wait_closed()
 
     if __name__ == "__main__":
