@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import socketIOClient from "socket.io-client";
+import Data from "./data";
 
 const Notification = () => {
   const [updatedData, setUpdatedData] = useState(null);
