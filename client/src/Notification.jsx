@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Data from "./data";
+import audioFile from "../src/security-alarm-80493.mp3";
 
 const Notification = () => {
+  const audioRef = useRef(null);
   const [updatedData, setUpdatedData] = useState(null);
+
   useEffect(() => {
     const socket = new WebSocket("ws://localhost:8080");
 
@@ -13,6 +16,11 @@ const Notification = () => {
     socket.onmessage = function (event) {
       const jsonData = JSON.parse(event.data);
       setUpdatedData(jsonData);
+      if (jsonData && updatedData.message && audioRef && audioRef.current) {
+        audioRef.current.play();
+      } else if (audioRef && audioRef.current) {
+        audioRef.current.pause();
+      }
     };
 
     return () => {
@@ -34,6 +42,10 @@ const Notification = () => {
             Notification Received: {updatedData.message}
           </div>
         )}
+        <audio ref={audioRef} loop>
+          <source src={audioFile} type="audio/mp3" />
+          Your browser does not support the audio element.
+        </audio>
       </div>
     </div>
   );
