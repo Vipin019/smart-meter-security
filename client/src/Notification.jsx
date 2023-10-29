@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import socketIOClient from "socket.io-client";
+import Data from "./data";
 
 const Notification = () => {
   const [socket, setSocket] = useState(null);
@@ -20,9 +21,14 @@ const Notification = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Notification Page - Centralized server for Monitoring Team</h2>
-      {updatedData && <div>Notification Received: {updatedData.message}</div>}
+    <div className="notification-container">
+      <div className="data-container">
+        <Data/>
+      </div>
+      <div  className="notification-box">
+        <h1  className="notification-heading">Notification Page - Centralized server for Monitoring Team</h1>
+        {updatedData && <div className="notification-message">Notification Received: {updatedData.message}</div>}
+      </div>
     </div>
   );
 };
