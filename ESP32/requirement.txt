@@ -1,0 +1,4 @@
+WebSockets ----> https://www.arduino.cc/reference/en/libraries/websockets/
+WiFi
+ArduinoJson ----> https://arduinojson.org/?utm_source=meta&utm_medium=library.properties
+EmonLib ----> https://github.com/openenergymonitor/EmonLib
