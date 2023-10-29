@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import socketIOClient from "socket.io-client";
 
 const Notification = () => {
   const [updatedData, setUpdatedData] = useState(null);
@@ -29,20 +28,3 @@ const Notification = () => {
 };
 
 export default Notification;
-
-// const [socket, setSocket] = useState(null);
-// const [updatedData, setUpdatedData] = useState(null);
-
-// useEffect(() => {
-//   const socket = socketIOClient("ws://localhost:8080");
-//   setSocket(socket);
-
-//   socket.on("updated_data", (data) => {
-//     console.log(data);
-//     setUpdatedData(data);
-//   });
-
-//   return () => {
-//     socket.disconnect();
-//   };
-// }, []);

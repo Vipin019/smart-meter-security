@@ -16,6 +16,3 @@ def findIp(ip):
         # Use the sniff function with a timeout and store the matched packets in a list
         sniff(prn=packet_callback, timeout=1)
     return isFind
-
-
-# print(findIp('100.110.170.205'))
