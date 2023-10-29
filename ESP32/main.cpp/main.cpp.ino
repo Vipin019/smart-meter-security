@@ -11,8 +11,8 @@ EnergyMonitor emon; // declare emon variavle of EnergyMonitor data type
 float kWh = 0;
 unsigned long lastmillis = millis();
 
-const char *ssid = "YOUR_SSID";         // Replace with your WiFi SSID
-const char *password = "YOUR_PASSWORD"; // Replace with your WiFi Password
+const char *ssid = "vipin123";      // Replace with your WiFi SSID
+const char *password = "Vipin123@"; // Replace with your WiFi Password
 
 WiFiServer server(80);
 WebSocketsServer webSocket = WebSocketsServer(81);
@@ -99,7 +99,7 @@ void setup()
     webSocket.begin();
     webSocket.onEvent(webSocketEvent);
 
-    pinMode(LED_BUILTIN, OUTPUT);// initialize digital pin LED_BUILTIN as an output.
+    pinMode(LED_BUILTIN, OUTPUT); // initialize digital pin LED_BUILTIN as an output.
 }
 
 void loop()
@@ -110,8 +110,8 @@ void loop()
 
     webSocket.broadcastTXT(jsonString);
 
-    digitalWrite(LED_BUILTIN, HIGH);  // turn the LED on (HIGH is the voltage level)
-    delay(1500);                      // wait for a second
-    digitalWrite(LED_BUILTIN, LOW);   // turn the LED off by making the voltage LOW
-    delay(1500);                      // wait for a second
+    digitalWrite(LED_BUILTIN, HIGH); // turn the LED on (HIGH is the voltage level)
+    delay(1500);                     // wait for a second
+    digitalWrite(LED_BUILTIN, LOW);  // turn the LED off by making the voltage LOW
+    delay(1500);                     // wait for a second
 }
