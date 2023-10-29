@@ -1,31 +1,26 @@
-import socketio
+import asyncio
+import websockets
 from ip import findIp
-
-sio = socketio.Server(cors_allowed_origins="*")
-app = socketio.WSGIApp(sio)
-
-updated_data = {"message": "False"}
+import json
 
 
-@sio.event
-def connect(sid, environ):
-    if findIp("100.110.186.42"):
-        updated_data = {"message": "True"}
-    print(f"Client {sid} connected")
-    sio.emit("updated_data", updated_data, room=sid)
+try:
 
+    async def connect(websocket, path):
+        if findIp("192.168.8.200"):
+            updated_data = {"message": "True"}
+        print(f"Client connected")
+        try:
+            await websocket.send(json.dumps(updated_data))
+        except Exception as e:
+            print(f"Error sending data: {e}")
 
-@sio.event
-def disconnect(sid):
-    print(f"Client {sid} disconnected")
+    async def main():
+        server = await websockets.serve(connect, "localhost", 8081)
+        await server.wait_closed()
 
-
-if __name__ == "__main__":
-    import eventlet
-    import threading
-
-    eventlet.wsgi.server(eventlet.listen(("localhost", 8080)), app)
-
-    # Simulate data updates in a separate thread
-    update_thread = threading.Thread(target=lambda: eventlet.spawn_after(1, connect))
-    update_thread.start()
+    if __name__ == "__main__":
+        asyncio.get_event_loop().run_until_complete(main())
+except KeyboardInterrupt:
+    print("KeyboardInterrupt received. Cleaning up...")
+    print("Cleanup complete.")

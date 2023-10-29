@@ -2,3 +2,7 @@ scapy
 flask_restful
 flask
 flask_cors
+python-socketio
+websockets
+json
+random

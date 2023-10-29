@@ -2,16 +2,12 @@
 import "./App.css";
 import Notification from "./Notification";
 import Data from "./data";
-import React, { useState } from 'react';
-import Navbar from './navbar';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
+import React, { useState } from "react";
+import Navbar from "./navbar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  const [currentRole, setCurrentRole] = useState('user');
+  const [currentRole, setCurrentRole] = useState("user");
 
   const handleRoleSelection = (role) => {
     setCurrentRole(role);
@@ -24,13 +20,12 @@ function App() {
         <h2>Current Role: {currentRole}</h2>
         <div className="App">
           <Routes>
-            <Route exact path="/user" element={<Data/>}/>
-            <Route exact path="/admin" element={<Notification/>}/>
+            <Route exact path="/user" element={<Data />} />
+            <Route exact path="/admin" element={<Notification />} />
           </Routes>
         </div>
       </Router>
     </>
-      
   );
 }
 
