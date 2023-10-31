@@ -1,30 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import MeterCard from "./meterCard";
 
-const Data = () => {
-  const [updatedData, setUpdatedData] = useState({
-    vrms: 0,
-    irms: 0,
-    apparentPower: 0,
-    realPower: 0,
-    kwh: 0,
-  });
-  useEffect(() => {
-    const socket = new WebSocket("ws://localhost:81");
-
-    socket.onopen = function () {
-      console.log("Connection is open");
-    };
-
-    socket.onmessage = function (event) {
-      const jsonData = JSON.parse(event.data);
-      setUpdatedData(jsonData);
-    };
-
-    return () => {
-      socket.close();
-    };
-  }, []);
+const Data = ({ updatedData }) => {
   return (
     <div>
       <h1>

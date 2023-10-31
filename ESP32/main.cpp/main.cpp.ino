@@ -11,8 +11,8 @@ EnergyMonitor emon; // declare emon variavle of EnergyMonitor data type
 float kWh = 0;
 unsigned long lastmillis = millis();
 
-const char *ssid = "vipin123";      // Replace with your WiFi SSID
-const char *password = "Vipin123@"; // Replace with your WiFi Password
+const char *ssid = "realme 7 pro";      // Replace with your WiFi SSID
+const char *password = "rohit123"; // Replace with your WiFi Password
 
 WiFiServer server(80);
 WebSocketsServer webSocket = WebSocketsServer(81);
@@ -82,7 +82,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t *payload, size_t length)
 
 void setup()
 {
-    Serial.begin(115200);
+    Serial.begin(921600);
 
     emon.voltage(35, vCalibration, 1.7); // Voltage: input pin, calibration, phase_shift
     emon.current(34, currCalibration);   // Current: input pin, calibration.
@@ -109,9 +109,9 @@ void loop()
     String jsonString = myTimerEvent();
 
     webSocket.broadcastTXT(jsonString);
-
+    delay(1000);
     digitalWrite(LED_BUILTIN, HIGH); // turn the LED on (HIGH is the voltage level)
-    delay(1500);                     // wait for a second
+    delay(1000);                     // wait for a second
     digitalWrite(LED_BUILTIN, LOW);  // turn the LED off by making the voltage LOW
-    delay(1500);                     // wait for a second
+    delay(1000);                     // wait for a second
 }
