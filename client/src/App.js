@@ -7,17 +7,16 @@ import Navbar from "./navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  const [currentRole, setCurrentRole] = useState("user");
+  // const [currentRole, setCurrentRole] = useState("user");
 
-  const handleRoleSelection = (role) => {
-    setCurrentRole(role);
-  };
+  // const handleRoleSelection = (role) => {
+  //   setCurrentRole(role);
+  // };
 
   return (
     <>
       <Router>
-        <Navbar onSelectRole={handleRoleSelection} />
-        <h2>Current Role: {currentRole}</h2>
+        <Navbar />
         <div className="App">
           <Routes>
             <Route exact path="/user" element={<Data />} />

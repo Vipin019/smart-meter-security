@@ -10,7 +10,7 @@ const Data = () => {
     kwh: 0,
   });
   useEffect(() => {
-    const socket = new WebSocket("ws://localhost:81");
+    const socket = new WebSocket("ws://192.168.9.83:81");
 
     socket.onopen = function () {
       console.log("Connection is open");
@@ -19,6 +19,8 @@ const Data = () => {
     socket.onmessage = function (event) {
       const jsonData = JSON.parse(event.data);
       setUpdatedData(jsonData);
+      console.log(jsonData
+        )
     };
 
     return () => {

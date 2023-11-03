@@ -7,7 +7,7 @@ const Notification = () => {
   const [updatedData, setUpdatedData] = useState(null);
 
   useEffect(() => {
-    const socket = new WebSocket("ws://localhost:8080");
+    const socket = new WebSocket("ws://192.168.9.152:8080");
 
     socket.onopen = function () {
       console.log("Connection is open");
@@ -16,13 +16,12 @@ const Notification = () => {
     socket.onmessage = function (event) {
       const jsonData = JSON.parse(event.data);
       setUpdatedData(jsonData);
-      if (jsonData && updatedData.message && audioRef && audioRef.current) {
+      if (jsonData && updatedData && updatedData.message && audioRef && audioRef.current) {
         audioRef.current.play();
       } else if (audioRef && audioRef.current) {
         audioRef.current.pause();
       }
     };
-
     return () => {
       socket.close();
     };
@@ -30,9 +29,6 @@ const Notification = () => {
 
   return (
     <div className="notification-container">
-      <div className="data-container">
-        <Data />
-      </div>
       <div className="notification-box">
         <h1 className="notification-heading">
           Notification Page - Centralized server for Monitoring Team
@@ -46,6 +42,9 @@ const Notification = () => {
           <source src={audioFile} type="audio/mp3" />
           Your browser does not support the audio element.
         </audio>
+      </div>
+      <div className="data-container">
+        <Data />
       </div>
     </div>
   );

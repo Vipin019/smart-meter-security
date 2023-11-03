@@ -35,25 +35,25 @@ p {
 /* Style for the container div */
 .notification-container {
   display: flex;
-  /* flex-direction: column; */
+  flex-direction: column;
   align-items: center;
   /* padding: 20px; */
 }
 
 /* Style for the Data component */
 .data-container {
-  width: 60%;
-  background-color: #f2f2f2;
-  border: 1px solid #ccc;
+  width: 100%;
+  /* background-color: #f2f2f2; */
+  /* border: 1px solid #ccc; */
   /* padding: 10px; */
   margin-bottom: 20px;
 }
 
 .notification-box {
-  width: 40%;
+  width: 100%;
   height: 100%;
-  background-color: hsl(0, 0%, 95%);
-  border: 1px solid #ccc;
+  /* background-color: hsl(0, 0%, 95%); */
+  /* border: 1px solid #ccc; */
   /* padding: 10px; */
   margin-bottom: 20px;
 }
@@ -74,4 +74,20 @@ p {
   padding: 10px;
   border-radius: 5px;
   font-weight: bold;
+}
+
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .meter-container {
+    flex-direction: column; /* Stack meters vertically on smaller screens */
+  }
+
+  .notification-container {
+    flex-direction: column; /* Stack notifications vertically on smaller screens */
+  }
+
+  .meter-card, .data-container, .notification-box {
+    width: 100%; /* Full width on smaller screens */
+  }
 }
