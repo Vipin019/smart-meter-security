@@ -1,9 +1,11 @@
 import React from "react";
 import MeterCard from "./meterCard";
+import Navbar from "./navbar";
 
 const Data = ({ updatedData }) => {
   return (
     <div>
+      <Navbar />
       <h1>
         <u>Smart Meter Dashboard</u>
       </h1>

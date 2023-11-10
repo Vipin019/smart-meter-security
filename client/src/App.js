@@ -2,8 +2,8 @@
 import "./App.css";
 import Notification from "./Notification";
 import Data from "./data";
+import Home from "./Pages/Home";
 import React, { useEffect, useState } from "react";
-import Navbar from "./navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -61,9 +61,13 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar />
         <div className="App">
           <Routes>
+            <Route
+              exact
+              path="/"
+              element={<Home updatedData={updatedData} />}
+            />
             <Route
               exact
               path="/user"
