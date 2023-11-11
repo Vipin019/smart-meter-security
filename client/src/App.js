@@ -17,6 +17,19 @@ function App() {
   });
   const [updatedNotification, setUpdatedNotification] = useState(null);
 
+  //for LCD
+  const [lcd, setLcd] = useState("home__display--off");
+
+  // for indicators
+  const [power, setPower] = useState("power--off");
+  const [homeIndicator1, setHomeIndicator1] = useState(
+    "home__indicator__1--off"
+  );
+  const [connectAndThreat, setConnectionAndThreat] = useState(
+    "connectAndThreat--off"
+  ); //ok-->connected, t-->threat,off-->not connected
+  const [load, setLoad] = useState("load--off");
+
   //role
   const handleRoleSelection = (role) => {
     setCurrentRole(role);
@@ -28,21 +41,43 @@ function App() {
 
     socket.onopen = function () {
       console.log("Connection is open");
+      setConnectionAndThreat("connectAndThreat--ok");
     };
 
     socket.onmessage = function (event) {
       const jsonData = JSON.parse(event.data);
-      setUpdatedData(jsonData);
+      setUpdatedData({
+        vrms: jsonData.vrms.toFixed(2),
+        irms: jsonData.irms.toFixed(2),
+        apparentPower: jsonData.apparentPower.toFixed(2),
+        realPower: jsonData.realPower.toFixed(2),
+        kwh: jsonData.kwh.toFixed(2),
+      });
+      if (jsonData?.vrms != 0) {
+        setPower("power--on");
+        setHomeIndicator1("home__indicator__1--on");
+        setLcd("home__display--on");
+      } else {
+        setPower("power--off");
+        setHomeIndicator1("home__indicator__1--off");
+        setLcd("home__display--off");
+      }
+      if (jsonData?.vrms != 0 && jsonData?.irms != 0) {
+        setLoad("load--on");
+      } else {
+        setLoad("load--off");
+      }
     };
 
     return () => {
       socket.close();
+      setConnectionAndThreat("connectAndThreat--off");
     };
   }, []);
 
   //notification
   useEffect(() => {
-    const socket = new WebSocket("ws://192.168.148.198:8080");
+    const socket = new WebSocket("ws://localhost:8080");
 
     socket.onopen = function () {
       console.log("Connection is open");
@@ -51,6 +86,11 @@ function App() {
     socket.onmessage = function (event) {
       const jsonData = JSON.parse(event.data);
       setUpdatedNotification(jsonData);
+      if (jsonData?.message === "True") {
+        setConnectionAndThreat("connectAndThreat--t");
+      } else {
+        setConnectionAndThreat("connectAndThreat--ok");
+      }
     };
 
     return () => {
@@ -66,7 +106,17 @@ function App() {
             <Route
               exact
               path="/"
-              element={<Home updatedData={updatedData} />}
+              element={
+                <Home
+                  updatedData={updatedData}
+                  updatedNotification={updatedNotification}
+                  power={power}
+                  homeIndicator1={homeIndicator1}
+                  connectAndThreat={connectAndThreat}
+                  load={load}
+                  lcd={lcd}
+                />
+              }
             />
             <Route
               exact
