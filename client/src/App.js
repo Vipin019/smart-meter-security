@@ -9,11 +9,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
   const [currentRole, setCurrentRole] = useState("user");
   const [updatedData, setUpdatedData] = useState({
-    vrms: 0,
-    irms: 0,
-    apparentPower: 0,
-    realPower: 0,
-    kwh: 0,
+    vrms: 0.0,
+    irms: 0.0,
+    apparentPower: 0.0,
+    realPower: 0.0,
+    kwh: 0.0,
   });
   const [updatedNotification, setUpdatedNotification] = useState(null);
 
@@ -37,7 +37,7 @@ function App() {
 
   //data
   useEffect(() => {
-    const socket = new WebSocket("ws://localhost:81");
+    const socket = new WebSocket("ws://192.168.188.31:81");
 
     socket.onopen = function () {
       console.log("Connection is open");
@@ -53,7 +53,7 @@ function App() {
         realPower: jsonData.realPower.toFixed(2),
         kwh: jsonData.kwh.toFixed(2),
       });
-      if (jsonData?.vrms != 0) {
+      if (jsonData.vrms != 0.0) {
         setPower("power--on");
         setHomeIndicator1("home__indicator__1--on");
         setLcd("home__display--on");
@@ -62,10 +62,10 @@ function App() {
         setHomeIndicator1("home__indicator__1--off");
         setLcd("home__display--off");
       }
-      if (jsonData?.vrms != 0 && jsonData?.irms != 0) {
-        setLoad("load--on");
-      } else {
+      if (jsonData.vrms === 0.0 || jsonData.irms === 0.0) {
         setLoad("load--off");
+      } else {
+        setLoad("load--on");
       }
     };
 
@@ -77,7 +77,7 @@ function App() {
 
   //notification
   useEffect(() => {
-    const socket = new WebSocket("ws://localhost:8080");
+    const socket = new WebSocket("ws://192.168.188.198:8080");
 
     socket.onopen = function () {
       console.log("Connection is open");

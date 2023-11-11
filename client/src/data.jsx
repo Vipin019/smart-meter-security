@@ -1,12 +1,11 @@
 import React from "react";
 import MeterCard from "./meterCard";
+import "./data.css";
 
 const Data = ({ updatedData }) => {
   return (
-    <div>
-      <h1>
-        <u>Smart Meter Real Time Data</u>
-      </h1>
+    <div className="data">
+      <h6>Smart Meter Real Time Data</h6>
       {updatedData && (
         <div className="meter-container">
           <MeterCard title="Voltage (V)" value={updatedData.vrms} />

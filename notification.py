@@ -7,7 +7,7 @@ import json
 try:
 
     async def connect(websocket, path):
-        if findIp("100.110.0.217"):
+        if findIp("192.168.188.194"):
             updated_data = {"message": "True"}
         print(f"Client connected")
         try:
@@ -16,7 +16,7 @@ try:
             print(f"Error sending data: {e}")
 
     async def main():
-        server = await websockets.serve(connect, "localhost", 8080)
+        server = await websockets.serve(connect, "192.168.188.198", 8080)
         await server.wait_closed()
 
     if __name__ == "__main__":

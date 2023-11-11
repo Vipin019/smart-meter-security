@@ -1,6 +1,5 @@
-// created by Prince Kumar (20UEE058)
-
-import React from 'react';
+import React from "react";
+import "./meterCard.css";
 
 function MeterCard({ title, value }) {
   return (
