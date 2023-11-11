@@ -1,33 +1,60 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import Data from "./data";
 import audioFile from "../src/security-alarm-80493.mp3";
+import Navbar from "./navbar";
 
 const Notification = ({ updatedNotification, updatedData }) => {
   // sound will only be played only when it is permited by browser
   //setting>>privacy and security>>additional content setting>>sound>>add site for Allowed to play sound
   return (
-    <div className="notification-container">
-      {/* <div className="data-container">
-        <Data updatedData={updatedData} />
-      </div> */}
-      <div className="notification-box">
-        <h1 className="notification-heading">
-          Notification Page - Centralized server for Monitoring Team
-        </h1>
-        {updatedNotification && (
-          <div className="notification-message">
-            Notification Received: {updatedNotification.message}
-            <audio autoPlay loop>
-              <source src={audioFile} type="audio/mp3" />
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-        )}
+    <>
+      <Navbar />
+      <div className="notification-container">
+        <div className="userInfo">
+          <h6>User Information</h6>
+          <p>User Name: {"Raman Kumar"}</p>
+          <p>User ID: {"Raman123@"}</p>
+          <p>Meter ID: {"djdfh54"}</p>
+          <p>Current balance: {"Rs. 1200"}</p>
+        </div>
+        <div className="notification-box">
+          <h1 className="notification-heading">Connection And Security</h1>
+          {!updatedNotification && (
+            <>
+              <p>Status: {"Connected and secure"}</p>
+              <p>Warning: {"No warning found"}</p>
+              <p>Problem: {"No Problem found"}</p>
+              <p>Message From Meter: {"Hi, I am Fine."}</p>
+              <p>Security Status: {"No vulnerability found"}</p>
+              <p>Security Warning: {"No security warning"}</p>
+            </>
+          )}
+          {updatedNotification && (
+            <div className="notification-message">
+              <p>Status: {"Connected but not secure"}</p>
+              <p>Warning: {"Security warning found"}</p>
+              <p>Problem: {"Security found"}</p>
+              <p>
+                Message From Meter:{" "}
+                {"An External IP Address" +
+                  updatedNotification?.message +
+                  " Is Connected"}
+              </p>
+              <p>Security Status: {"Vulnerability found"}</p>
+              <p>Security Warning: {"Trying to get the data"}</p>
+              <p>External IP Address:{updatedNotification?.message}</p>
+              <audio autoPlay loop>
+                <source src={audioFile} type="audio/mp3" />
+                Your browser does not support the audio element.
+              </audio>
+            </div>
+          )}
+        </div>
+        <div className="data-container">
+          <Data updatedData={updatedData} />
+        </div>
       </div>
-      <div className="data-container">
-        <Data updatedData={updatedData} />
-      </div>
-    </div>
+    </>
   );
 };
 
