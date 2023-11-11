@@ -1,19 +1,21 @@
-// Created by Prince Kumar (20UEE058)
-
 import React, { useState } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import { IoChevronBackCircleSharp } from "react-icons/io5";
 
-const Navbar = () => {
+const Navbar = ({ left, mid, right }) => {
   return (
     <nav className="navbar">
-      <Link to="/" className="navbar__home">
-        {<IoChevronBackCircleSharp className="navbar__home--icon" />}
+      <Link to={left === "Admin" ? "/admin" : "/"} className="navbar__home">
+        {left === "Admin" ? (
+          <small className="navbar__admin">{left}</small>
+        ) : (
+          <IoChevronBackCircleSharp className="navbar__home--icon" />
+        )}
       </Link>
-      <h6>Centrilized System</h6>
+      <h6>{mid}</h6>
       <Link to="/user" className="navbar__users">
-        Find Users
+        {right}
       </Link>
     </nav>
   );

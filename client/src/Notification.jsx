@@ -9,7 +9,7 @@ const Notification = ({ updatedNotification, updatedData }) => {
   //setting>>privacy and security>>additional content setting>>sound>>add site for Allowed to play sound
   return (
     <>
-      <Navbar />
+      <Navbar left={"Home"} mid={"Centrilized System"} right={"All Users"} />
       <div className="notification">
         <div className="notification-container">
           <div className="userInfo">

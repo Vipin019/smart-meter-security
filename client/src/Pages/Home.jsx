@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./home.css";
 import SmartMeter from "../smart-meter.png";
 import audioFile from "../smart meter.mp3";
+import Navbar from "../navbar";
 
 const Home = ({
   updatedData,
@@ -48,9 +49,10 @@ const Home = ({
   }, [count]);
   return (
     <div className="home">
-      <div className="home__heading">
-        <h1>SMART ENERGY METER</h1>
-      </div>
+      {/* <div className="home__heading"> */}
+      {/* <h1>SMART ENERGY METER</h1> */}
+      <Navbar left={"Admin"} mid={"SMART ENERGY METER"} right={"User"} />
+      {/* </div> */}
       <img src={SmartMeter} alt="Smart Meter"></img>
       <div className={lcd}>
         <h6>{dispData}</h6>
