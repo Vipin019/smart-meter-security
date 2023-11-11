@@ -8,3 +8,28 @@
   box-shadow: 0 0 3px 1px #8b8989;
   text-decoration: none;
 }
+.navbar h6 {
+  font-size: 2rem;
+  color: #cac5c5;
+}
+.navbar__home {
+  margin-left: 1rem;
+}
+.navbar__home--icon {
+  font-size: 2rem;
+  color: black;
+}
+.navbar__users {
+  margin-right: 1rem;
+  text-decoration: none;
+  background-color: black;
+  color: rgb(191, 188, 188);
+  padding: 0.4rem;
+  border-radius: 0.2rem;
+}
+.navbar__home--icon:hover {
+  color: rgb(42, 42, 42);
+}
+.navbar__users:hover {
+  background-color: rgb(42, 42, 42);
+}

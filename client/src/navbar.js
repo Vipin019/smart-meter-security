@@ -8,9 +8,13 @@ import { IoChevronBackCircleSharp } from "react-icons/io5";
 const Navbar = () => {
   return (
     <nav className="navbar">
-      <Link to="/">{<IoChevronBackCircleSharp />}</Link>
+      <Link to="/" className="navbar__home">
+        {<IoChevronBackCircleSharp className="navbar__home--icon" />}
+      </Link>
       <h6>Centrilized System</h6>
-      <Link to="/user">Find User</Link>
+      <Link to="/user" className="navbar__users">
+        Find Users
+      </Link>
     </nav>
   );
 };
