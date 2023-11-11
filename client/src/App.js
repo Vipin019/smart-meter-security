@@ -42,7 +42,7 @@ function App() {
 
   //notification
   useEffect(() => {
-    const socket = new WebSocket("ws://localhost:8080");
+    const socket = new WebSocket("ws://192.168.148.198:8080");
 
     socket.onopen = function () {
       console.log("Connection is open");

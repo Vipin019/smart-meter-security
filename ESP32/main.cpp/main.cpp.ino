@@ -11,8 +11,8 @@ EnergyMonitor emon; // declare emon variavle of EnergyMonitor data type
 float kWh = 0;
 unsigned long lastmillis = millis();
 
-const char *ssid = "realme 7 pro";      // Replace with your WiFi SSID
-const char *password = "rohit123"; // Replace with your WiFi Password
+const char *ssid = "Let's enjoy";      // Replace with your WiFi SSID
+const char *password = "hk@050803"; // Replace with your WiFi Password
 
 WiFiServer server(80);
 WebSocketsServer webSocket = WebSocketsServer(81);
