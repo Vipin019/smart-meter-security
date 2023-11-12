@@ -25,7 +25,11 @@ const Data = ({ updatedData, url }) => {
         </div>
       ) : (
         <>
-          <Navbar left={"Home"} mid={"My Smart Meter"} right={"Admin Mode"} />
+          <Navbar
+            left={"HOME"}
+            mid={"MY SMART METER DASHBOARD"}
+            right={"ADMIN MODE"}
+          />
           <div className="data__main">
             <div className="data__main--userInfo">
               <UserInfoCard />

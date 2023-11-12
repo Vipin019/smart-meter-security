@@ -16,7 +16,11 @@ const Notification = ({
   //setting>>privacy and security>>additional content setting>>sound>>add site for Allowed to play sound
   return (
     <>
-      <Navbar left={"Home"} mid={"Centrilized System"} right={"User Mode"} />
+      <Navbar
+        left={"HOME"}
+        mid={"MONITORING AND CONTROL UNIT"}
+        right={"USER MODE"}
+      />
       <div className="notification">
         <div className="notification-container">
           <UserInfoCard />

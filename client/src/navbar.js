@@ -7,10 +7,10 @@ const Navbar = ({ left, mid, right }) => {
   return (
     <nav className="navbar">
       <Link
-        to={left === "Admin Mode" ? "/admin" : "/"}
+        to={left === "ADMIN MODE" ? "/admin" : "/"}
         className="navbar__home"
       >
-        {left === "Admin Mode" ? (
+        {left === "ADMIN MODE" ? (
           <small className="navbar__admin">{left}</small>
         ) : (
           <IoChevronBackCircleSharp className="navbar__home--icon" />
@@ -18,7 +18,7 @@ const Navbar = ({ left, mid, right }) => {
       </Link>
       <h6>{mid}</h6>
       <Link
-        to={right === "User Mode" ? "/user" : "/admin"}
+        to={right === "USER MODE" ? "/user" : "/admin"}
         className="navbar__users"
       >
         {right}

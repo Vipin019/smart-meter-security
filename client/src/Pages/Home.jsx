@@ -52,9 +52,9 @@ const Home = ({
       {/* <div className="home__heading"> */}
       {/* <h1>SMART ENERGY METER</h1> */}
       <Navbar
-        left={"Admin Mode"}
+        left={"ADMIN MODE"}
         mid={"SMART ENERGY METER"}
-        right={"User Mode"}
+        right={"USER MODE"}
       />
       {/* </div> */}
       <img src={SmartMeter} alt="Smart Meter"></img>
