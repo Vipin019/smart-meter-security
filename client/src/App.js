@@ -3,11 +3,10 @@ import "./App.css";
 import Notification from "./Notification";
 import Data from "./data";
 import Home from "./Pages/Home";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  const [currentRole, setCurrentRole] = useState("user");
   const [updatedData, setUpdatedData] = useState({
     vrms: 0.0,
     irms: 0.0,
@@ -30,14 +29,15 @@ function App() {
   ); //ok-->connected, t-->threat,off-->not connected
   const [load, setLoad] = useState("load--off");
 
-  //role
-  const handleRoleSelection = (role) => {
-    setCurrentRole(role);
-  };
+  // for warning
+  const [warning, setWarning] = useState("warning-no");
+
+  //sound
+  const audioRef = useRef(null);
 
   //data
   useEffect(() => {
-    const socket = new WebSocket("ws://192.168.188.31:81");
+    const socket = new WebSocket("ws://localhost:81");
 
     socket.onopen = function () {
       console.log("Connection is open");
@@ -77,7 +77,7 @@ function App() {
 
   //notification
   useEffect(() => {
-    const socket = new WebSocket("ws://192.168.188.198:8080");
+    const socket = new WebSocket("ws://localhost:8080");
 
     socket.onopen = function () {
       console.log("Connection is open");
@@ -88,8 +88,13 @@ function App() {
       setUpdatedNotification(jsonData);
       if (jsonData?.message === "True") {
         setConnectionAndThreat("connectAndThreat--t");
+        if (warning === "warning-no") {
+          setWarning("warning-yes");
+          audioRef?.current?.play();
+        }
       } else {
         setConnectionAndThreat("connectAndThreat--ok");
+        setWarning("warning-no");
       }
     };
 
@@ -97,6 +102,14 @@ function App() {
       socket.close();
     };
   }, []);
+
+  //warning
+  const handleOnWarningChange = (e) => {
+    if (warning === "warning-yes") {
+      setWarning("warning-cut");
+      audioRef.current.pause();
+    }
+  };
 
   return (
     <>
@@ -121,7 +134,7 @@ function App() {
             <Route
               exact
               path="/user"
-              element={<Data updatedData={updatedData} />}
+              element={<Data updatedData={updatedData} url={"/user"} />}
             />
             <Route
               exact
@@ -130,6 +143,9 @@ function App() {
                 <Notification
                   updatedNotification={updatedNotification}
                   updatedData={updatedData}
+                  warning={warning}
+                  handleOnWarningChange={handleOnWarningChange}
+                  audioRef={audioRef}
                 />
               }
             />

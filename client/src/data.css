@@ -1,5 +1,34 @@
+.data {
+  background-color: rgb(212, 212, 212);
+  box-shadow: 0 0 4px 2px rgb(212, 212, 212);
+  margin: 0.5rem;
+}
 .data h6 {
   font-size: 1.1rem;
   color: rgb(66, 66, 67);
   text-decoration: underline;
+}
+.data__main {
+  background-color: rgb(235, 235, 235);
+  display: flex;
+}
+.data__main--userInfo {
+  margin: 0.5rem;
+}
+#data__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 56vw;
+  padding: 0.5rem;
+}
+.data__main p {
+  font-size: 1rem;
+  color: rgb(87, 89, 90);
+}
+.data__main h6 {
+  font-size: 1.1rem;
+  color: rgb(66, 66, 67);
+  text-decoration: underline;
+  margin-bottom: 1rem;
 }
